@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuration Page</title>
+<!--    <link rel="stylesheet" href="../static/myapp.css">-->
+
+<style>
+
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 20px;
+        padding: 20px;
+        background-color: #f4f4f4;
+    }
+
+    h1 {
+        color: #333;
+    }
+
+    form {
+        margin-bottom: 20px;
+    }
+
+    label, input, button {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    button {
+        background-color: #4CAF50;
+        color: white;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    hr {
+        border: 0;
+        height: 1px;
+        background: #ccc;
+        margin: 20px 0;
+    }
+
+    .output-message {
+        color: #007bff;
+        font-weight: bold;
+    }
+</style>
+
+</head>
+
+<body>
+<h1>Fetch Config</h1>
+
+<!-- Form to submit the id -->
+<form action="/api/configurations/id" method="get">
+    <label>Config to Load (ConfigId): </label>
+    <input type="text" name="id" th:value="${id}">
+    <button type="submit">Submit</button>
+</form>
+
+<!-- Display the configuration data -->
+<table>
+    <tr th:each="row : ${configuration}">
+        <td th:each="value : ${row}" th:text="${value}"></td>
+    </tr>
+</table>
+
+<hr>
+
+<h1>Update Remark</h1>
+
+<!-- Form to submit the id and remark -->
+<form action="/api/id" method="post">
+    <label>Config to Update (ConfigId): </label>
+    <input type="text" id="id" name="id" th:value="${id}">
+    <label for="remark">Remark: </label>
+    <input type="text" id="remark" name="remark" th:value="${remark}">
+    <button type="submit">Submit</button>
+</form>
+
+<h4>Output</h4>
+<div class="output-message" th:if="${message}">
+    <p th:text="${message}"></p>
+</div>
+</body>
+</html>
